@@ -5,7 +5,11 @@
     },
     "id": "iandyhd3.hide_controller_ui",
     "name": "Hide Controller UI",
-    "version": "v1.0.0",
+    "version": "v1.0.1",
     "developer": "iAndyHD3",
-    "description": ""
+    "description": "",
+    "links": {
+        "community": "https://discord.gg/mMgnBsxZKH",
+        "source": "https://github.com/iAndyHD3/HideControllerUI"
+    }
 }

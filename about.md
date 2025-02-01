@@ -1,3 +1,3 @@
-# Template Mod
+# Hide Controller UI
 
-Edit about.md to change this
+Shows normal ui buttons when the controller is connected, while keeping the controller working.
