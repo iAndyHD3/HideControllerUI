@@ -1,7 +1,7 @@
 
-
 #include <Geode/modify/CreatorLayer.hpp>
 #include <Geode/modify/EditLevelLayer.hpp>
+#include <Geode/modify/EditorUI.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
 #include <Geode/modify/FLAlertLayer.hpp>
 #include <Geode/modify/GJDropDownLayer.hpp>
@@ -30,36 +30,41 @@
 #include <Geode/modify/SecretRewardsLayer.hpp>
 #include <Geode/modify/UILayer.hpp>
 #include <Geode/modify/WorldSelectLayer.hpp>
+#include <type_traits>
+#include "Geode/binding/CCMenuItemSpriteExtra.hpp"
+#include "Geode/binding/GameObject.hpp"
+#include "Geode/binding/LevelEditorLayer.hpp"
+#include "Geode/binding/MenuLayer.hpp"
+#include "Geode/cocos/CCDirector.h"
+#include "Geode/cocos/cocoa/CCGeometry.h"
+#include "Geode/cocos/cocoa/CCObject.h"
+#include "Geode/cocos/cocoa/CCString.h"
+#include "Geode/cocos/label_nodes/CCLabelBMFont.h"
+#include "Geode/cocos/menu_nodes/CCMenuItem.h"
+#include "Geode/cocos/robtop/mouse_dispatcher/CCMouseDelegate.h"
+#include "Geode/cocos/robtop/mouse_dispatcher/CCMouseDispatcher.h"
+#include "Geode/utils/cocos.hpp"
+
 
 using namespace geode;
 using namespace cocos2d;
 
 struct CCApplicationExt : CCApplication {
-  void setControllerEnabled(bool val) { m_bControllerConnected = val; }
-  static CCApplicationExt* get() {
-    return static_cast<CCApplicationExt*>(CCApplication::get());
-  }
+    void setControllerEnabled(bool val) { m_bControllerConnected = val; }
+    static CCApplicationExt* get() { return static_cast<CCApplicationExt*>(CCApplication::get()); }
 };
 
-template <typename T> struct CallHelper {
-  template <typename F> static T call(F&& f) { return f(); }
-};
+#define NUMARGS(...) (sizeof((int[]) {__VA_ARGS__}) / sizeof(int))
 
-template <> struct CallHelper<void> {
-  template <typename F> static void call(F&& f) { f(); }
-};
-
-#define NUMARGS(...) (sizeof((int[]){__VA_ARGS__}) / sizeof(int))
-
-#define GENERATE_MODIFY_N_ARGS(modifyclass, ret, func, args, ...)              \
-  class $modify(modifyclass) {                                                 \
-  public:                                                                      \
-    ret func args {                                                            \
-      auto app = CCApplicationExt::get();                                      \
-      app->setControllerEnabled(false);                                        \
-      return modifyclass::func(__VA_ARGS__);                                   \
-    }                                                                          \
-  };
+#define GENERATE_MODIFY_N_ARGS(modifyclass, ret, func, args, ...)                                                      \
+    class $modify(modifyclass) {                                                                                       \
+    public:                                                                                                            \
+        ret func args {                                                                                                \
+            auto app = CCApplicationExt::get();                                                                        \
+            app->setControllerEnabled(false);                                                                          \
+            return modifyclass::func(__VA_ARGS__);                                                                     \
+        }                                                                                                              \
+    };
 // clang-format off
 #define GENERATE_MODIFY_0(modifyclass, ret, func, args) GENERATE_MODIFY_N_ARGS(modifyclass, ret, func, args)
 #define GENERATE_MODIFY_1(modifyclass, ret, func, args) GENERATE_MODIFY_N_ARGS(modifyclass, ret, func, args, p0)
@@ -85,7 +90,7 @@ GENERATE_MODIFY_0(GJGarageLayer, bool, init, ())
 GENERATE_MODIFY_1(GJShopLayer, bool, init, (ShopType p0))
 GENERATE_MODIFY_1(GauntletLayer, bool, init, (GauntletType p0))
 GENERATE_MODIFY_1(GauntletSelectLayer, bool, init, (int p0))
-GENERATE_MODIFY_1(LeaderboardsLayer, bool, init, (LeaderboardState p0))
+GENERATE_MODIFY_2(LeaderboardsLayer, bool, init, (LeaderboardType p0, LeaderboardStat p1))
 GENERATE_MODIFY_1(LevelAreaInnerLayer, bool, init, (bool p0))
 GENERATE_MODIFY_0(LevelAreaLayer, bool, init, ())
 GENERATE_MODIFY_1(LevelBrowserLayer, bool, init, (GJSearchObject * p0))

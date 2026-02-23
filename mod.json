@@ -1,13 +1,14 @@
 {
-    "geode": "4.2.0",
+    "geode": "5.0.0-beta.4",
     "gd": {
-        "win": "2.2074"
+        "win": "2.2081",
+        "mac": "2.2081"
     },
     "id": "iandyhd3.hide_controller_ui",
     "name": "Hide Controller UI",
-    "version": "v1.0.1",
+    "version": "v1.0.2",
     "developer": "iAndyHD3",
-    "description": "",
+    "description": "Its in the name",
     "links": {
         "community": "https://discord.gg/mMgnBsxZKH",
         "source": "https://github.com/iAndyHD3/HideControllerUI"
