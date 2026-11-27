@@ -1,4 +1,4 @@
-
+#include <Geode/Geode.hpp>
 #include <Geode/modify/CreatorLayer.hpp>
 #include <Geode/modify/EditLevelLayer.hpp>
 #include <Geode/modify/EditorUI.hpp>
@@ -45,7 +45,6 @@
 #include "Geode/cocos/robtop/mouse_dispatcher/CCMouseDispatcher.h"
 #include "Geode/utils/cocos.hpp"
 
-
 using namespace geode;
 using namespace cocos2d;
 
@@ -84,7 +83,7 @@ struct CCApplicationExt : CCApplication {
 GENERATE_MODIFY_0(CreatorLayer, bool, init, ())
 GENERATE_MODIFY_1(EditLevelLayer, bool, init, (GJGameLevel * p0))
 GENERATE_MODIFY_0(EndLevelLayer, void, customSetup, ())
-GENERATE_MODIFY_9(FLAlertLayer, bool, init, (FLAlertLayerProtocol * p0, char const* p1, gd::string p2, char const* p3, char const* p4, float p5, bool p6, float p7, float p8))
+GENERATE_MODIFY_9(FLAlertLayer, bool, init, (FLAlertLayerProtocol * p0, char const* p1, std::string p2, char const* p3, char const* p4, float p5, bool p6, float p7, float p8))
 GENERATE_MODIFY_3(GJDropDownLayer, bool, init, (char const* p0, float p1, bool p2))
 GENERATE_MODIFY_0(GJGarageLayer, bool, init, ())
 GENERATE_MODIFY_1(GJShopLayer, bool, init, (ShopType p0))
