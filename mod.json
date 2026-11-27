@@ -1,12 +1,12 @@
 {
-    "geode": "5.0.0-beta.4",
+    "geode": "6.0.0",
     "gd": {
-        "win": "2.2081",
-        "mac": "2.2081"
+        "win": "2.2091",
+        "mac": "2.2091"
     },
     "id": "iandyhd3.hide_controller_ui",
     "name": "Hide Controller UI",
-    "version": "v1.0.2",
+    "version": "v1.0.3",
     "developer": "iAndyHD3",
     "description": "Its in the name",
     "links": {
